@@ -55,3 +55,27 @@ def download_gov24(driver_path, name, val):
 
     driver.close()
 
+
+def crop_gov(dir_path, file_path, page_cnt):
+    img = cv2.imread(file_path)
+    path = file_path.split(os.sep)
+    file_name = path[-1].split(".")[0]
+
+    # first crop
+    x = 70
+    if page_cnt == 1:
+        y = 360
+    else:
+        y = 360
+    width = 530
+    height = 210
+
+    cropped_img = img[y: y + height, x: x + width]
+
+    # preprocessing
+    gray_cropped_img = cv2.cvtColor(cropped_img, cv2.COLOR_RGB2GRAY)
+    ret, th1 = cv2.threshold(gray_cropped_img, 216, 255, cv2.THRESH_BINARY)
+    file_name = os.path.join(dir_path, "crop_{}.jpg".format(file_name))
+    cv2.imwrite(file_name, th1)
+
+
