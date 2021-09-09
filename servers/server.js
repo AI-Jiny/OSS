@@ -6,11 +6,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 const logger = require('morgan');
 
-const corsOptions = {
-  origin: ["https://vouchercorp.com","https://m.vouchercorp.com"],
-  credentials: true
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(logger('dev'));
@@ -22,7 +18,6 @@ app.get('/test',(req, res) =>{
 //https://github.com/extrabacon/python-shell
 app.post('/api/python', (req, res)=> {
 
-    console.log(req.body)
     const time = parseInt(req.body.time)*1000;
     const username = req.body.username
     const auth = req.body.auth; 
@@ -31,14 +26,11 @@ app.post('/api/python', (req, res)=> {
     const document3 = req.body.vaccination3
     const document4 = req.body.vaccination4
 
-    
-
     if(username == ""){
         res.json({'result' : 'NameError'}).end();
     }
-
     if(auth == "gov"){   
-        if(username == "" || document1.length != 4 || document1.length != 4 || document1.length != 4 || document1.length != 4){
+        if(username == "" || document1.length != 4 || document2.length != 4 || document3.length != 4 || document4.length != 4){
             res.json({'result' : 'BlankError'}).end();
         }
     }else if(auth == "kdca"){
@@ -49,7 +41,7 @@ app.post('/api/python', (req, res)=> {
 
     let options = {
         mode: 'text',
-        pythonPath: 'C:\\Users\\Administrator\\anaconda3\\envs\\cert\\python.exe', // Python의 경로를 나타낸다
+        pythonPath: 'C:/Users/mbm/Anaconda3/envs/cert/python.exe', // Python의 경로를 나타낸다
         pythonOptions: ['-u'], // get print results in real-time
         scriptPath: './servers/python/',
         args:[username,document1,document2,document3,document4]
@@ -74,9 +66,6 @@ app.post('/api/python', (req, res)=> {
     }, time);
     
     checkVaccine.end((err,code,signal) => {
-        console.log(err)
-        console.log(code)
-        console.log(signal)
         clearTimeout(pythonKiller);
     }); 
 

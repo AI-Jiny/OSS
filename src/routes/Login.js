@@ -1,47 +1,69 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect, useRef} from "react";
 import styled from 'styled-components'
 
 const Login = () => {
   const [username,setUsername] = useState("");
-  const [document1,setDocument1] = useState("");
-  const [document2,setDocument2] = useState("");
-  const [document3,setDocument3] = useState("");
-  const [document4,setDocument4] = useState("");
-  const [selectedItem,setSelectedItem] = useState("1");
-  const [message,setMessage] = useState("확인");
+  const [auth,setAuth] = useState("gov");
+  const [vaccination1,setVaccination1] = useState("");
+  const [vaccination2,setVaccination2] = useState("");
+  const [vaccination3,setVaccination3] = useState("");
+  const [vaccination4,setVaccination4] = useState("");
+  const [selectedItem,setSelectedItem] = useState(true);
+  const [flag,setFlag] = useState(true);
+  const [message,setMessage] = useState("");
+  const time = 30;
+  const [timer,setTimer] = useState(30);
+  let timerRef = useRef();
+  const decreaseNum = () => setTimer((prev) => prev - 1);
 
   useEffect(() =>{
-    
   },[])
 
   const onChange = (event) =>{
     const {target : {name,value}}= event;
     if(name === "username"){
       setUsername(value);
-    }else if(name ==="document1"){
-      setDocument1(value);
-    }else if(name ==="document2"){
-      setDocument2(value);
-    }else if(name ==="document3"){
-      setDocument3(value);
-    }else if(name ==="document4"){
-      setDocument4(value);
+    }else if(name ==="vaccination1"){
+      setVaccination1(value);
+    }else if(name ==="vaccination2"){
+      setVaccination2(value);
+    }else if(name ==="vaccination3"){
+      setVaccination3(value);
+    }else if(name ==="vaccination4"){
+      setVaccination4(value);
+    }
 }
+
+  const flashFunction = () =>{
+    if(flag == true && message == ""){
+    }else{
+      if(flag == true){
+        return( <Message>{message}</Message> )
+      }else{
+        return( <Message>{`${timer} 초 남았습니다`}</Message> )
+      }
+    } 
   }
 
   const onSubmit = async (event)=>{
     event.preventDefault();
-    await fetch('https://antivaccination.net/api/python',{
+    setFlag(false)
+    clearInterval(timerRef.current);
+    setTimer(20);
+    timerRef.current = setInterval(decreaseNum, 1000);
+    await fetch('http://localhost:3000/api/python',{
       method: "POST",  
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
         username,
-        document1,
-        document2,
-        document3,
-        document4
+        auth,
+        vaccination1,
+        vaccination2,
+        vaccination3,
+        vaccination4,
+        time
       })
     })
     .then(reponse =>{
@@ -49,34 +71,44 @@ const Login = () => {
     })
     .then((data) =>{
       if(data.result == 'Complete'){
-        setMessage("인증 완료")
+        setMessage("인증에 성공하였습니다.")
+        setFlag(true)
       }else if(data.result == 'Error'){
-        setMessage("인증 실패")
+        setMessage("예방접종 문서에서 코로나를 인식할 수 없습니다.")
+        setFlag(true)
+      }else if(data.result == 'BlankError'){
+        setMessage("문서 번호란을 양식에 맞춰 정확히 채워주세요.")
+        setFlag(true)
+      }else if(data.result == 'TimeOutError'){
+        setMessage("에러 : 관리자에게 문의해주세요.")
+        setFlag(true)
+      }else if(data.result == 'NameError'){
+        setMessage("이름을 입력해주세요.")
+        setFlag(true)
+      }else if(data.result == 'NotFoundDocument'){
+        setMessage("문서 번호를 찾을 수 없습니다.")
+        setFlag(true)
       }
     })
-  }
-
-  const onSubmit2 = async (event)=>{
-    event.preventDefault();
-    console.log('tst')
-    await fetch('http://15.165.43.226:3001/test',{
-      method: "GET"
-    })
-      
   }
 
 
   const selectChange = (event) =>{
     const {target : {value}}= event;
-    setSelectedItem(value)
-    if(value === '1'){
-      setSelectedItem('1')
-    }else if(value === '2'){
-      setSelectedItem('2')
+    setVaccination1("")
+    setVaccination2("")
+    setVaccination3("")
+    setVaccination4("")
+    if(value === "true"){
+      setSelectedItem(true)
+      setAuth('gov')
+    }else if(value === "false"){
+      setSelectedItem(false)
+      setAuth('kdca')
     }
   }
 
-  if(selectedItem == 1){
+
     return(
       <>
         <Background>
@@ -85,57 +117,27 @@ const Login = () => {
             <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;600&display=swap" rel="stylesheet"/>
             <Form onSubmit={onSubmit}>
               <Label>이름 : </Label>
-              <Input name="username" type="text" placeholder="Username" required value={username} onChange={onChange}></Input>
+              <Input name="username" type="text" placeholder="Username" value={username} onChange={onChange}></Input>
               <Label>문서 종류 : </Label>
               <Select value={selectedItem} onChange={selectChange}>
-                <option selected value="1">정부24</option>
-                <option value="2">질병관리청</option>
+                <option selected value="true">정부24</option>
+                <option value="false">질병관리청</option>
               </Select>
               <Label>문서 번호 : </Label>
               <DocumentContainer>
-                <Input name="document1" type="text" value={document1} onChange={onChange}></Input>
-                <Input name="document2" type="text" value={document2} onChange={onChange}></Input>
-                <Input name="document3" type="text" value={document3} onChange={onChange}></Input>
-                <Input name="document4" type="text" value={document4} onChange={onChange}></Input>
+                <Input name="vaccination1" type="text" value={vaccination1} onChange={onChange}></Input>
+                <Input name="vaccination2" type="text" value={vaccination2} onChange={onChange}></Input>
+                <Input name="vaccination3" type="text" value={vaccination3} onChange={onChange}></Input>
+                { selectedItem ? <Input name="vaccination4" type="text" value={vaccination4} onChange={onChange}></Input> : <></> }
+                
               </DocumentContainer>
-              <Input__summit type="submit" value={message} />
-            </Form>
-            <Form onSubmit={onSubmit2}>
-              <Input__summit type="submit" value={message} />
+              <Input__summit disabled={!flag} type="submit" value={'인증하기'} />
+              {flashFunction()}
             </Form>
           </Container>
         </Background>
       </>
     )
-  }
-  else if(selectedItem == 2){
-    return(
-      <>
-        <Background>
-          <Container>
-            <link rel="preconnect" href="https://fonts.gstatic.com"/>
-            <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;600&display=swap" rel="stylesheet"/>
-            <Form onSubmit={onSubmit}>
-              <Label>이름 : </Label>
-              <Input name="username" type="text" placeholder="Username" required value={username} onChange={onChange}></Input>
-              <Label>문서 종류 : </Label>
-              <Select value={selectedItem} onChange={selectChange}>
-                <option selected value="1">정부24</option>
-                <option value="2">질병관리청</option>
-              </Select>
-              <Label>문서 번호 : </Label>
-              <DocumentContainer>
-                <Input name="document1" type="text" value={document1} onChange={onChange}></Input>
-                <Input name="document2" type="text" value={document2} onChange={onChange}></Input>
-                <Input name="document3" type="text" value={document3} onChange={onChange}></Input>
-              </DocumentContainer>
-              <Input__summit type="submit" value={message} />
-            </Form>
-          </Container>
-        </Background>
-      </>
-    )
-  }
 }
 
 export default Login;
@@ -203,4 +205,8 @@ color:black;
 
 const DocumentContainer = styled.div`
 display:flex;
+`
+
+const Message = styled.div`
+color: white;
 `
