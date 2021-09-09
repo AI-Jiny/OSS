@@ -1,0 +1,323 @@
+// Here you can add other styles
+body {
+  margin: 0;
+  min-width: 1700px;
+}
+
+/* First Page */
+.first__page {
+  display: flex;
+  justify-content: center;
+  min-width: 1700px;
+  position: relative;
+}
+.first__image {
+  width: 100%;
+  height: 700px;
+}
+.human__brain {
+  position: absolute;
+  left: -240px;
+  top: -150px;
+  height: 1000px;
+  opacity: 75%;
+  z-index: 0;
+}
+.elec__brain {
+  position: sticky;
+  position: absolute;
+  right: 0px;
+  height: 700px;
+}
+.first__center {
+  position: absolute;
+  width: 1080px;
+  height: 700px;
+}
+.first__center .line {
+  position: absolute;
+  left: 15%;
+}
+.first__center .circle {
+  position: absolute;
+  top: 8%;
+  left: 11%;
+  height: 50%;
+}
+.first__line {
+  position: absolute;
+  left: 19%;
+  top: 17%;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 3.25;
+  letter-spacing: 19.8px;
+  text-align: left;
+  color: #ffffff;
+  margin: 0;
+}
+.job__line {
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 3.25;
+  letter-spacing: 1.8px;
+  text-align: left;
+  color: #a9a8a8;
+}
+.developer {
+  position: absolute;
+  top: 60%;
+  left: 40%;
+}
+.designer {
+  position: absolute;
+  top: 75%;
+  left: 40%;
+}
+.producer {
+  position: absolute;
+  top: 60%;
+  left: 61%;
+}
+.director {
+  position: absolute;
+  top: 75%;
+  left: 61%;
+}
+.name__line {
+  font-family: NotoSansCJKkr;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 4.64;
+  letter-spacing: 1.26px;
+  text-align: left;
+  color: #ffffff;
+}
+.pch1 {
+  position: absolute;
+  top: 64%;
+  left: 40%;
+}
+.pch2 {
+  position: absolute;
+  top: 79%;
+  left: 40%;
+}
+.scy {
+  position: absolute;
+  top: 64%;
+  left: 61%;
+}
+.rwp {
+  position: absolute;
+  top: 79%;
+  left: 61%;
+}
+
+/* Second Page */
+.second__page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #141414;
+  z-index: 1;
+}
+.second__image {
+  width: 100%;
+  max-width: 2000px;
+  height: 1150px;
+  position: relative;
+}
+.second__center {
+  width: 1440px;
+  height: 1150px;
+  position: absolute;
+}
+.second__line {
+  position: absolute;
+  top: 210px;
+  left: 765px;
+  font-family: NotoSansCJKkr;
+  font-size: 49.5px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.02;
+  letter-spacing: -0.5px;
+  text-align: left;
+  color: #ffffff;
+}
+.second__subline {
+  position: absolute;
+  top: 385px;
+  left: 765px;
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: -0.2px;
+  text-align: left;
+  color: #c8c8c8;
+}
+.thesis {
+  position: absolute;
+  top: 170px;
+  left: 0;
+  width: 648px;
+  height: 353px;
+  background-color: #d7d7d7;
+}
+.video {
+  width: 467px;
+  height: 255px;
+  background-color: #d7d7d7;
+}
+.howToUse {
+  position: absolute;
+  top: 610px;
+  left: 0;
+}
+.English {
+  position: absolute;
+  top: 610px;
+  left: 487px;
+}
+.Korean {
+  position: absolute;
+  top: 610px;
+  right: 0;
+}
+.third__line {
+  font-family: NYJGothicEB;
+  font-size: 23px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.83;
+  letter-spacing: -0.23px;
+  text-align: center;
+  color: #ffffff;
+}
+.first__title {
+  position: absolute;
+  top: 880px;
+  left: 175px;
+}
+.second__title {
+  position: absolute;
+  top: 880px;
+  left: 600px;
+}
+.third__title {
+  position: absolute;
+  top: 880px;
+  left: 1090px;
+}
+.third__subline {
+  font-family: NotoSansCJKkr;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #c8c8c8;
+}
+.first__subtitle {
+  position: absolute;
+  top: 930px;
+  left: 40px;
+}
+.second__subtitle {
+  position: absolute;
+  top: 930px;
+  left: 515px;
+}
+.third__subtitle {
+  position: absolute;
+  top: 930px;
+  left: 1000px;
+}
+.third__page {
+  position: relative;
+}
+.thirdbg {
+  width: 100%;
+  height: 170px;
+  background-color: black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.above__hor__line {
+  position: absolute;
+  width: 1440px;
+  top: 25px;
+}
+.hor__line {
+  border-top: 1px solid #d6d6d6;
+  position: absolute;
+  margin-top: 0px;
+  width: 100%;
+  max-width: 2000px;
+  top: 80px;
+}
+.below__hor__line {
+  position: absolute;
+  width: 1440px;
+  top: 110px;
+}
+.bottom__line {
+  font-family: NotoSansCJKkr;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.61;
+  letter-spacing: -0.18px;
+  text-align: center;
+  color: #c8c8c8;
+}
+.company {
+  position: absolute;
+  left: 0;
+}
+.location {
+  position: absolute;
+  right: 0;
+}
+.copyright {
+  position: absolute;
+  left: 0;
+}
+.telephone {
+  position: absolute;
+  white-space: pre;
+  right: 770px;
+}
+.fax {
+  position: absolute;
+  white-space: pre;
+  right: 540px;
+}
+.email {
+  position: absolute;
+  white-space: pre;
+  right: 270px;
+}
+.github {
+  position: absolute;
+  white-space: pre;
+  right: 0;
+}
