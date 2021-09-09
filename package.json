@@ -56,8 +56,8 @@
     "react-scripts": "^4.0.1"
   },
   "scripts": {
-    "start": "pm2 start ./servers/server.js",
-    "test": "nodemon ./servers/server.js"
+    "start": "react-scripts start",
+    "server": "nodemon ./servers/server.js"
   },
   "bugs": {
     "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
